@@ -78,6 +78,12 @@ Deployment via Puppet: https://github.com/hggh/sshkeymanager-puppet
 * simplejson
 * django-bootstrap3
 
+## license/copyright
+
+License: [GPL v2](https://github.com/hggh/sshkeymanager-django/blob/master/LICENSE.txt)
+
+Copyright 2015 Jonas Genannt
+
 
 ## contact?
 
