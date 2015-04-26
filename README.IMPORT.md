@@ -47,3 +47,6 @@ import a csv file. file should contain:
     hostname,environment,ip
 
 you can leave environment and ip empty. if you do not add a environment, ``production`` will be used.
+
+
+    ./manage.py import --host /tmp/hosts.csv
