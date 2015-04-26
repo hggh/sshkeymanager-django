@@ -1,0 +1,6 @@
+*.py[co]
+*.db
+*.log
+.project
+.pydevproject
+.settings
