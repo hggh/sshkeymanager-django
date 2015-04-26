@@ -6,4 +6,4 @@ script:
   - "cd sshkeymanager/"
   - "cp keymanager/settings.test.py keymanager/settings.py"
   - "./manage.py migrate"
-  - "./manage.py test""
+  - "./manage.py test"
