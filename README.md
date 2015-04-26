@@ -1,4 +1,4 @@
-# SSH Key Manager
+# SSH Key Manager [![Build Status](https://api.travis-ci.org/hggh/sshkeymanager-django.svg)](https://travis-ci.org/hggh/sshkeymanager-django
 
 Manage your public SSH Keys inside a Django web application and deploy the SSH keys via Puppet or via scp/rsync.
 
