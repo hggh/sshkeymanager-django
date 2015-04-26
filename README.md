@@ -6,7 +6,7 @@ Manage your public SSH Keys inside a Django web application and deploy the SSH k
 ## Screenshots of the web application
 
 
-[screenshots](https://github.com/hggh/sshkeymanager-django/blob/master/README.screenshots.md)
+see [README.screenshots.md](https://github.com/hggh/sshkeymanager-django/blob/master/README.screenshots.md)
 
 
 ## Features
@@ -34,6 +34,10 @@ Manage your public SSH Keys inside a Django web application and deploy the SSH k
      * SSH Keys can be imported from files
 
 
+## Import feature
+
+see [README.IMPORT.md](https://github.com/hggh/sshkeymanager-django/blob/master/README.IMPORT.md)
+
 ## Export the configuration
 
 There is a easy to use API with access tokens.
@@ -46,6 +50,23 @@ Configure the API access tokens inside the settings.py configuration:
     ]
 
 
+get the configuration for all hosts:
+
+    curl -X POST -d 'API_KEY=foobar'  http://localhost:8000/api/getkeys/
+
+get the configuration only for one environment:
+
+    curl -X POST -d 'API_KEY=jonas&filter_type=environment&filter_value=staging'  http://localhost:8000/api/getkeys/
+
+
+get the configuration only for one group:
+
+    curl -X POST -d 'API_KEY=jonas&filter_type=group&filter_value=webserver'  http://localhost:8000/api/getkeys/
+
+get the configuration only for one host:
+
+    curl -X POST -d 'API_KEY=jonas&filter_type=host&filter_value=web1.example.com'  http://localhost:8000/api/getkeys/
+
 Deployment via Puppet: https://github.com/hggh/sshkeymanager-puppet
 
 
@@ -57,3 +78,7 @@ Deployment via Puppet: https://github.com/hggh/sshkeymanager-puppet
 * simplejson
 * django-bootstrap3
 
+
+## contact?
+
+Jonas Genannt @hggh / jonas@brachium-system.net
