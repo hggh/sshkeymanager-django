@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+SSH Keyrings
+{% endblock %}
+
+
+
+{% block content %}
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Keys count</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for ring in object_list %}
+        <tr>
+            <td>{{ ring.pk }}</td>
+            <td><a href="{% url 'sshkeyring_detail' ring.id %}">{{ ring.name }}</a></td>
+            <td>{{ ring.keys.all|length }}</td>       
+            <td>
+                <a href="{% url 'sshkeyring_update' ring.id %}">{% bootstrap_icon "pencil" %}</a>
+                <a href="{% url 'sshkeyring_delete' ring.id %}">{% bootstrap_icon "trash" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

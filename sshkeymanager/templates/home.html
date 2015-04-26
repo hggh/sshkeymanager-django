@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+
+{% block site_title %}
+Overview
+{% endblock %}
+
+{% block content %}
+
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-3">Object</th>
+                <th>count</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-md-3">Accounts</td>
+                <td>{{ account_count }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Environments</td>
+                <td>{{ environment_count }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Hosts</td>
+                <td>{{ host_count }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Groups</td>
+                <td>{{ group_count }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">SSH Keys</td>
+                <td>{{ sshkey_count }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">SSH Keyrings</td>
+                <td>{{ sshkeyring_count }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

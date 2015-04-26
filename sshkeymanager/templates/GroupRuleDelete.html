@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+delete rule {{ object.rule }}
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Delete!</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

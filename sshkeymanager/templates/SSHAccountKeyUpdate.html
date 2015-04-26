@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+SSH Account {{ object.name }} - Update Keys / Keyrings
+{% endblock %}
+
+{% block content %}
+
+{% if sshkeys|length > 0 %}
+<script>
+var sshkeys = {{sshkeys|safe}}; 
+</script>
+{% endif %}
+
+{% if sshkeyrings|length > 0 %}
+<script>
+var sshkeyrings = {{sshkeyrings|safe}}; 
+</script>
+{% endif %}
+
+<div style="padding:10px;padding-bottom:30px;">
+<a href="{% url 'sshaccount_detail' object.id %}">{% bootstrap_icon "arrow-left" %} back to SSH Account</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thbody>
+        <tr>
+            <td class="col-md-2"><b>Account Name:</b></td>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <td class="col-md-2"><b>Belongs to:</b></td>
+            <td>{{ object.obj_name|title }} / {{ object.get_object.name }}</td>
+        </tr>
+    </thbod>
+</table>
+
+<br/>
+<form class="form-horizontal" action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" id="keyrings" name="keyrings" value="" />
+    <div class="form-group{% if form.keyrings.errors %} has-error{% endif %}">
+        <label for="id_keys" class="col-sm-2 control-label">Keyrings</label>
+        <div class="col-sm-10" id="sshaccount_keyring_view">
+            <input type="text" id="sshaccount_keyring_selector" class="form-control typeahead" /><br/>
+            <ul id="sshaccount_keyrings" style="padding:0px;">
+                {% for ring in object.keyrings.all %}
+                    <li class="tag-cloud">{{ ring.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <input type="hidden" id="keys" name="keys" value="" />
+    <div class="form-group{% if form.keys.errors %} has-error{% endif %}">
+        <label for="id_keys" class="col-sm-2 control-label">SSH Keys</label>
+        <div class="col-sm-10" id="sshaccount_key_view">
+            <input type="text" id="sshaccount_key_selector" class="form-control typeahead" /><br/>
+            <ul id="sshaccount_keys" style="padding:0px;">
+                {% for key in object.keys.all %}
+                    <li class="tag-cloud">{{ key.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+     <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="sshaccount_key_update_submit" class="btn btn-default">Save!</button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

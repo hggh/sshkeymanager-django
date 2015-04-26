@@ -1,0 +1,31 @@
+{% load bootstrap3 %}
+ <div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="col-md-1">Id</th>
+                <th class="col-md-3">Account Name</th>
+                <th>Host Name</th>
+                <th class="col-md-1">Keyrings</th>
+                <th class="col-md-1">Keys</th>
+                <th class="col-md-1">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for account in object_list_host %}
+        <tr>
+            <td class="col-md-1">{{ account.pk }}</td>
+            <td class="col-md-3"><a href="{% url 'sshaccount_detail' account.id %}">{{ account.name }}</a></td>
+            <td><a href="{% url 'host_detail' account.obj_id %}">{{ account.get_object.name }}</a></td>
+            <td class="col-md-1">{{ account.keyrings.all|length }}</td>
+            <td class="col-md-1">{{ account.keys.all|length }}</td>
+            <td class="col-md-1">
+                <a href="{% url 'sshaccount_key_update' account.id %}" title="Update Keys and Keyrings for this account." >{% bootstrap_icon "tags" %}</a> 
+                <a href="{% url 'sshaccount_update' account.id %}" title="Update account name" >{% bootstrap_icon "pencil" %}</a> 
+                <a href="{% url 'sshaccount_delete' account.id %}" title="Delete this account">{% bootstrap_icon "trash" %}</a> 
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

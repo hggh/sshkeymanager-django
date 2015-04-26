@@ -1,0 +1,80 @@
+{% load bootstrap3 %}
+
+{% if sshaccount_available|length > 0 %}
+<script>
+sshaccount_available = {{sshaccount_available|safe}};
+</script>
+{% endif %}
+
+
+
+<form class="form-horizontal" action="" method="post">
+    {% csrf_token %}
+    <div class="form-group{% if form.name.errors %} has-error{% endif %} col-sm-14">
+        <label for="id_name" class="col-sm-2 control-label">SSH Account Name:</label>
+        <div class="col-sm-10" id="sshaccount_name">
+            <input type="text" {% if form.name.value %}value="{{ form.name.value }}" {% endif %}name="name" class="form-control typeahead" maxlength="32" id="inputEmail3" placeholder="SSH Account" required="required" title=""/>
+            {% for error in form.name.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="form-group{% if form.obj_id.errors %} has-error{% endif %} col-sm-14">
+        {% if object.obj_name == 'host' or create_type == 'host' %}
+            <label for="id_obj_id" class="col-sm-2 control-label">Account mapped to Host:</label>
+        <div class="col-sm-10">
+            <input type="hidden" name="obj_name" value="host" />
+            <select name="obj_id" class="form-control">
+                {% for host in host_list %}
+                    <option value="{{ host.id }}" {% if object.obj_id == host.id or host.id_str == form.obj_id.value %}selected="selected"{% endif %}>{{ host.name }}</option>
+                {% endfor %}
+            </select>
+            {% for error in form.obj_id.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if object.obj_name == 'group' or create_type == 'group' %}
+            <label for="id_obj_id" class="col-sm-2 control-label">Account mapped to Group:</label>
+        <div class="col-sm-10">
+            <input type="hidden" name="obj_name" value="group" />
+            <select name="obj_id" class="form-control">
+                {% for group in group_list %}
+                    <option value="{{ group.id }}" {% if object.obj_id == group.id or group.id_str == form.obj_id.value %}selected="selected"{% endif %}>{{ group.name }}</option>
+                {% endfor %}
+            </select>
+            {% for error in form.obj_id.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if object.obj_name == 'environment' or create_type == 'environment' %}
+            <label for="id_obj_id" class="col-sm-2 control-label">Account mapped to Environment:</label>
+        <div class="col-sm-10">
+            <input type="hidden" name="obj_name" value="environment" />
+            <select name="obj_id" class="form-control">
+                {% for env in environment_list %}
+                    <option value="{{ env.id }}" {% if object.obj_id == env.id or env.id_str == form.obj_id.value %}selected="selected"{% endif %}>{{ env.name }}</option>
+                {% endfor %}
+            </select>
+            {% for error in form.obj_id.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+    </div>
+
+    {% for error in form.non_field_errors %}
+    <div class="form-group has-error col-sm-14">
+        <span class="help-block">{{ error }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="sshkeyring_submit" class="btn btn-default">Save!</button>
+        </div>
+    </div>
+</form>

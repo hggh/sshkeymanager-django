@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+SSH Account {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+<table class="table table-bordered table-striped">
+    <thbody>
+        <tr>
+            <td class="col-md-2"><b>Account Name:</b></td>
+            <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <td class="col-md-2"><b>Belongs to:</b></td>
+            <td>{{ object.obj_name|title }} / {{ object.get_object.name }}</td>
+        </tr>
+        <tr>
+            <td class="col-md-2"> </td>
+            <td><a href="{% url 'sshaccount_key_update' object.id %}"><button type="button" class="btn btn-default">Edit Keyrings/Keys</button></a></td>
+        </tr>
+    </thbod>
+</table>
+
+<br/>
+
+<h3>Keyrings</h3>
+
+<div class="table-responsive">
+   <table class="table table-striped">
+       <thead>
+           <tr>
+               <th>Keyring Name</th>
+           </tr>
+       </thead>
+       <tbody>
+        {% for ring in object.keyrings.all %}
+        <tr>
+            <td>{{ ring.name }}</td>
+        </tr>
+        {% endfor %}
+       </tbody>
+   </table>
+</div>
+
+<br/>
+
+<h3>Keys</h3>
+
+<div class="table-responsive">
+   <table class="table table-striped">
+       <thead>
+           <tr>
+               <th>SSH Key Name</th>
+           </tr>
+       </thead>
+       <tbody>
+        {% for ring in object.keys.all %}
+        <tr>
+            <td>{{ ring.name }}</td>
+        </tr>
+        {% endfor %}
+       </tbody>
+   </table>
+</div>
+
+{% endblock %}

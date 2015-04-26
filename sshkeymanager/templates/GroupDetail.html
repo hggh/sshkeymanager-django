@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+Host Group {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+
+
+<h3>Group Rules</h3>
+<note>You can add regular expression rules. Every new Hosts will added in background if the rule matches the hostname</note>
+
+<br/>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rule</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for rule in object.grouprule_set.all %}
+        <tr>
+            <td>{{ rule.id }}</td>
+            <td>{{ rule.rule }}</td>
+            <td>
+                <a href="{% url 'group_rule_update' object.id rule.id %}">{% bootstrap_icon "pencil" %}</a>
+                <a href="{% url 'group_rule_delete' object.id rule.id %}">{% bootstrap_icon "trash" %}</a>
+            </tr>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div>
+<a href="{% url 'group_rule_create' group.id %}">Add new rule...</a>
+</div>
+
+<br/>
+
+<h3>members</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Host</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for host in object.hosts.all %}
+        <tr>
+            <td>{{ host.id }}</td>
+            <td><a href="{% url 'host_detail' host.id %}">{{ host.name }}</a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<h3>Accounts</h3>
+
+{% with object_list_group=object.get_accounts %}
+    {% include "SSHAccount/Group.html" %}
+{% endwith %}
+
+
+
+{% endblock %}

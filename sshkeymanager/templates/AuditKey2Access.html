@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+Audit / List Key Access to Hosts/Accounts
+{% endblock %}
+
+
+{% block content %}
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-2">Hostname</th>
+                <th>Account</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for host in hosts %}
+        <tr>
+            <td><a href="{% url 'host_detail' host.id %}">{{ host.name }}</a></td>
+            <td>
+            <table class="table table-striped table-hover">
+                {% for name,keys in host.get_account_merged.items %}
+                <tr>
+                    <td>{{ name }}</td>
+                    <td>
+                        {% for key in keys %}
+                            {{ key.name }}<br/>
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

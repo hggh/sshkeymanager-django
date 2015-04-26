@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+Update SSH Keyring {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+<script>
+var sshkeys = {{sshkeys|safe}}; 
+</script>
+
+
+{% include "SSHKeyring_form.html" %}
+
+{% endblock %}

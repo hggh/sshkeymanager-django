@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+List all Environments
+{% endblock %}
+
+{% block content %}
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Environment Name</th>
+                <th>Server count</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for env in object_list %}
+        <tr>
+            <td>{{ env.pk }}</td>
+            <td><a href="{% url 'environment_detail' env.id %}">{{ env.name }}</a></td>
+            <td>{{ env.host_set.all|length }}</td>
+            <td>
+              <a href="{% url 'environment_update' env.id %}">{% bootstrap_icon "pencil" %}</a>
+              <a href="{% url 'environment_delete' env.id %}">{% bootstrap_icon "trash" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

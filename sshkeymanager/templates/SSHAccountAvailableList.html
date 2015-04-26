@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+List available SSH Accounts
+{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-info" role="alert">Available SSH Accounts: These names are used for autocompletion on SSH Account page.<br/>
+<ul>
+    <li>Import available account names with the PuppetDB import.</li>
+    <li>Import available account names with the import console command.</li>
+</ul>
+See <a href="https://github.com/hggh/sshkeymanager-django/blob/master/README.IMPORT.md">README.IMPORT.md</a> for more information.
+</div>
+
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for account in object_list %}
+        <tr>
+            <td>{{ account.id }}</td>
+            <td>{{ account.name }}</td>
+            <td>
+              <a href="{% url 'sshaccountavailable_delete' account.id %}">{% bootstrap_icon "trash" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

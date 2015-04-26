@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+delete Host {{ object.name }}
+{% endblock %}
+
+
+{% block content %}
+
+<h3>Accounts</h3>
+
+{% with object_list_host=object.get_accounts %}
+    {% include "SSHAccount/Host.html" %}
+{% endwith %}
+
+
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Delete!</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

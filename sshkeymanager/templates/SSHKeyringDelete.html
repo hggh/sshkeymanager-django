@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+delete SSH Keyring {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+<h3>with members</h3>
+<ul>
+{% for key in object.keys.all %}
+<li>{{ key.name }}</li>
+{% endfor %}
+</ul>
+
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Delete!</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

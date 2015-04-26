@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+SSH Key {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+<textarea id="id_sshkey" class="form-control" title="" rows="10" required="required" placeholder="SSH Key" name="sshkey" cols="40">{{ object.sshkey }}</textarea>
+
+<hr/>
+
+<h3>{{ object.name }} is member of the following SSH Keyrings</h3>
+
+<ul>
+    {% for ring in object.sshkeyring_set.all %}
+    <li><a href="{% url 'sshkeyring_detail' ring.id %}">{{ ring.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

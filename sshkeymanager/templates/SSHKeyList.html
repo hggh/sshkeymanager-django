@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+List all SSH Keys
+{% endblock %}
+
+{% block content %}
+ <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Key</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sshkey in object_list %}
+        <tr>
+            <td>{{ sshkey.pk }}</td>
+            <td><a href="{% url 'sshkey_detail' sshkey.id %}">{{ sshkey.name }}</a></td>
+            <td>{{ sshkey.sshkey_short }}...</td>
+            <td>
+              <a href="{% url 'sshkey_update' sshkey.id %}">{% bootstrap_icon "pencil" %}</a>
+              <a href="{% url 'sshkey_delete' sshkey.id %}">{% bootstrap_icon "trash" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

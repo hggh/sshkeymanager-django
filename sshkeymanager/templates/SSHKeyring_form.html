@@ -1,0 +1,37 @@
+{% if sshkeys|length > 0 %}
+<script>
+var sshkeys = {{sshkeys|safe}}; 
+</script>
+{% endif %}
+
+<form class="form-horizontal" action="" method="post">
+    {% csrf_token %}
+    <div class="form-group{% if form.name.errors %} has-error{% endif %}">
+        <label for="id_name" class="col-sm-2 control-label">SSH Keyring Name:</label>
+        <div class="col-sm-10">
+            <input type="text" {% if form.name.value %}value="{{ form.name.value }}" {% endif %}name="name" class="form-control" maxlength="32" id="inputEmail3" placeholder="SSH Keyring" required="required" title=""/>
+            {% for error in form.name.errors %}
+            <span class="help-block">{{ error|escape }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="form-group{% if form.keys.errors %} has-error{% endif %}">
+        <label for="id_keys" class="col-sm-2 control-label">SSH Keyring Members:</label>
+        <input type="hidden" name="keys" id="keys" value="" />
+        <div class="col-sm-10" id="sshkeyring_keys">
+            <input type="text" id="keys_selector" class="form-control typeahead" /><br/>
+            <ul id="sshkeys" style="padding:0px;">
+            {% if object %}
+            {% for key in object.keys.all %}
+                <li class="tag-cloud">{{ key.name }}</li>
+            {% endfor %}
+            {% endif %}    
+            </ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" id="sshkeyring_submit" class="btn btn-default">Save!</button>
+        </div>
+    </div>
+</form>

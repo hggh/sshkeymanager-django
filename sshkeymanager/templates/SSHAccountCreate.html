@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+Create new SSH Account for {{ create_type|capfirst }}
+{% endblock %}
+
+{% block content %}
+
+{% include "SSHAccount_form.html" %}
+
+{% endblock %}

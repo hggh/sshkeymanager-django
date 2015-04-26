@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+delete Host Group {{ object.name }}
+{% endblock %}
+
+{% block content %}
+
+<h3>members</h3>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Host</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for host in object.hosts.all %}
+        <tr>
+            <td>{{ host.id }}</td>
+            <td>{{ host.name }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Delete!</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

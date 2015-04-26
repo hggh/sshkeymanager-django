@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load bootstrap3 %}
+<head>
+
+{% load static from staticfiles %}
+    <link href="{% static "css/bootstrap.min.css" %}" media="all" rel="stylesheet">
+    <link href="{% static "css/bootstrap-tag-cloud.css" %}" media="all" rel="stylesheet">
+    <link href="{% static "css/keymgmt.css" %}" media="all" rel="stylesheet">
+    
+    <script src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/typeahead.jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap-tag-cloud.js" %}"></script>
+    <script src="{% static "js/keymgmt-base.js" %}"></script>
+    <title>SSH Key Manager</title>
+ </head>
+ 
+ <body>
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{% url 'home' %}">SSH Key Manager</a>
+            </div>
+        </div>
+    </div>
+    <!-- Header END -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+
+                <strong><i class="glyphicon glyphicon-user"></i> Accounts</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li><a href="{% url 'sshaccount_list' %}">View Accounts</a></li>
+                        <li>Add new account for...</li>
+                        <li><a href="{% url 'sshaccount_create_environment' %}">...Environment</a></li>
+                        <li><a href="{% url 'sshaccount_create_group' %}">...Group</a></li>
+                        <li><a href="{% url 'sshaccount_create_host' %}">...Host</a></li>
+                    </ul>
+                </ul>
+                <p></p>            
+            
+                <strong><i class="glyphicon glyphicon-blackboard"></i> Environments</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'environment_list' %}">View Environments</a></li>
+                        <li> <a href="{% url 'environment_create' %}">Add new Environment</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+            
+                <strong><i class="glyphicon glyphicon-cloud"></i> Hosts</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'host_list' %}">View Hosts</a></li>
+                        <li> <a href="{% url 'host_create' %}">Add new Host</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+
+                <strong><i class="glyphicon glyphicon-list"></i> Host Groups</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'group_list' %}">View Host Groups</a></li>
+                        <li> <a href="{% url 'group_create' %}">Add new Host Group</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+
+                <strong><i class="glyphicon glyphicon-tag"></i> SSH Keys</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'sshkey_list' %}">View SSH Keys</a></li>
+                        <li> <a href="{% url 'sshkey_create' %}">Add new SSH Key</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+                
+                <strong><i class="glyphicon glyphicon-tags"></i> SSH Keyrings</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'sshkeyring_list' %}">View SSH Keyrings</a></li>
+                        <li> <a href="{% url 'sshkeyring_create' %}">Add new SSH Keyring</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+                <strong><i class="glyphicon glyphicon-eye-open"></i> Audit</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'audit_key2access' %}">Key 2 Access</a></li>
+                    </ul>
+                </ul>
+                <p></p>
+                <strong><i class="glyphicon glyphicon-wrench"></i> Settings</strong>
+                <ul class="nav nav-stacked">
+                    <ul class="nav nav-stacked collapse in" id="userMenu">
+                        <li> <a href="{% url 'sshaccountavailable_list' %}">SSH Accounts Available</a></li>
+                    </ul>
+                </ul>
+                
+
+            </div> <!-- col-sm-3 -->
+            <div class="col-sm-9">
+                {% bootstrap_messages %}
+                <h1>{% block site_title %}{% endblock %}</h1>
+                <br/>
+                {% block content %}{% endblock %} 
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container fluid -->
+    <script src="{% static "js/keymgmt.js" %}"></script>
+ </body>
+ </html>

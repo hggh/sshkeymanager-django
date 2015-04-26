@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+SSH Accounts
+{% endblock %}
+
+{% block content %}
+
+{# ============= Accounts to Environments ============= #}
+<h2>Accounts to Environments</h2>
+
+{% include "SSHAccount/Environment.html" %}
+
+{# ============= Accounts to Groups ============= #}
+<h2>Accounts to Groups</h2>
+
+{% include "SSHAccount/Group.html" %}
+
+{# ============= Accounts to Hosts ============= #}
+<h2>Accounts to Hosts</h2>
+
+{% include "SSHAccount/Host.html" %}
+
+{% endblock %}
