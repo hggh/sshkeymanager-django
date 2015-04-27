@@ -51,6 +51,9 @@ http://85.10.208.131:8080/
 
 ## Import feature
 
+* import hosts/environments from file or PuppetDB
+* import ssh public keys from file
+
 see [README.IMPORT.md](https://github.com/hggh/sshkeymanager-django/blob/master/README.IMPORT.md)
 
 ## Export the configuration
