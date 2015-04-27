@@ -1,6 +1,8 @@
 # SSH Key Manager  [![Build Status](https://api.travis-ci.org/hggh/sshkeymanager-django.svg)](https://travis-ci.org/hggh/sshkeymanager-django)
 
-Manage your public SSH Keys inside a Django web application and deploy the SSH keys via Puppet or via scp/rsync.
+Manage your public SSH Keys inside a Django web application and deploy the SSH keys via your configuration management or via scp/rsync.
+
+**Yet not production ready!**
 
 
 ## Screenshots of the web application
@@ -33,6 +35,19 @@ see [README.screenshots.md](https://github.com/hggh/sshkeymanager-django/blob/ma
      * Hosts + Environments can be imported from files
      * SSH Keys can be imported from files
 
+
+## Demo
+
+You can have a look a my demo system. The database will be reseted every hour.
+
+http://85.10.208.131:8080/
+
+## TODO
+
+* export to Puppet Hiera configuration - write API client
+* API client to use scp/rsync to deploy your keys
+* add/remove hosts to groups
+* display all accounts/servers on SSH Key page
 
 ## Import feature
 
@@ -67,7 +82,15 @@ get the configuration only for one host:
 
     curl -X POST -d 'API_KEY=jonas&filter_type=host&filter_value=web1.example.com'  http://localhost:8000/api/getkeys/
 
-Deployment via Puppet: https://github.com/hggh/sshkeymanager-puppet
+
+### Puppet
+
+You can use [sshkeymanager-puppet](https://github.com/hggh/sshkeymanager-puppet) to deploy your keys via Puppet.
+
+
+### scp/rsync
+
+You can use the API to loop through your servers and copy the keys to the servers.
 
 
 ## Requirements
