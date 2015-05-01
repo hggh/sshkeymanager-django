@@ -5,3 +5,4 @@
 .pydevproject
 .settings
 sshkeymanager/keymanager/settings.py
+db.sqlite3
