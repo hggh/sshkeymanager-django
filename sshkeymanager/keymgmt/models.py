@@ -44,7 +44,7 @@ class SSHAccountAvailable(models.Model):
     """
     name = models.CharField(_('account name'), unique=True, null=False, max_length=100, blank=False,
                             validators=[
-                                    MinLengthValidator(3),
+                                    MinLengthValidator(2),
                                     MaxLengthValidator(100),
                                     RegexValidator(regex='^[0-9A-Za-z_.-]+$')
                                 ])
@@ -342,7 +342,7 @@ class SSHAccount(models.Model):
     """
     name = models.CharField(_('SSH Account Name'), null=False, max_length=100, blank=False,
                             validators=[
-                                        MinLengthValidator(3),
+                                        MinLengthValidator(2),
                                         MaxLengthValidator(100),
                                         RegexValidator(regex='^[0-9A-Za-z_.-]+$')
                                         ])
