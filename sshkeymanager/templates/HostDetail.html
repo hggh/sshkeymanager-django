@@ -17,7 +17,7 @@ Host {{ object.name }}
         </tr>
         <tr>
             <td class="col-md-1"><b>Environment:</b></td>
-            <td>{{ object.environment.name }}</td>
+            <td><a href="{% url 'environment_detail' object.environment.id %}">{{ object.environment.name }}</a></td>
         </tr>
         <tr>
             <td class="col-md-1"><b>Host Name:</b></td>
