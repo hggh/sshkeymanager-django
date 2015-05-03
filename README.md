@@ -44,7 +44,6 @@ http://85.10.208.131:8080/
 
 ## TODO
 
-* export to Puppet Hiera configuration - write API client
 * API client to use scp/rsync to deploy your keys
 * add/remove hosts to groups
 * display all accounts/servers on SSH Key page
