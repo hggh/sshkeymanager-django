@@ -1,8 +1,10 @@
 # SSH Key Manager  [![Build Status](https://api.travis-ci.org/hggh/sshkeymanager-django.svg)](https://travis-ci.org/hggh/sshkeymanager-django)
 
-Manage your public SSH Keys inside a Django web application and deploy the SSH keys via your configuration management or via scp/rsync.
+Manage your public SSH Keys inside a web application and deploy them via your configuration management or via a script.
+A easy to use SSH public key deployment to centrally manage your SSH public keys.
 
-**Yet not production ready!**
+With SSH Key Manager you can group your servers and map accounts to the groups. You can also group a number of keys 
+to a keyring and map this keyring to a account.
 
 
 ## Screenshots of the web application
