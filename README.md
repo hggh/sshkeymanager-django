@@ -19,8 +19,8 @@ see [README.screenshots.md](https://github.com/hggh/sshkeymanager-django/blob/ma
  * a host belongs to a Environment
  * groups of hosts
  * a host can be in member in n-groups
- * a group can have 'rules'
- * then adding a new host, in background the group rules are processed and if hostname matches the rule. host will be added to group
+ * a group can have 'rules' (rules are regex)
+ * while adding a new host, in background the group rules are processed and if hostname matches the rule. host will be added to group
    * rule: '^web[0-9]+' will match ``web10.example.com``.
  * Accounts are the SSH Accounts on the host.
  * a account can be child of:
