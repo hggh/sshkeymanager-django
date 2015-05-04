@@ -49,6 +49,7 @@ http://85.10.208.131:8080/
 * API client to use scp/rsync to deploy your keys
 * add/remove hosts to groups
 * display all accounts/servers on SSH Key page
+* LDAP Auth / general auth system?
 
 ## Import feature
 
