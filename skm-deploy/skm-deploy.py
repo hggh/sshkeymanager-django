@@ -13,8 +13,6 @@ except:
 
 DEFAULT_CONFIG='/etc/skm-deploy.conf'
 CONFIG=None
-CONFIG_FILTER_TYPE=None
-CONFIG_FILTER_VALUE=None
 POST_DATA={}
 
 def _get_config(filename):
@@ -42,18 +40,14 @@ if __name__ == '__main__':
     exit(1)
 
   if args.filter_type:
-    if args.filter_type in [ 'group', 'host', 'environemnt' ]:
-      CONFIG_FILTER_TYPE=args.filter_type
-    else:
+    if args.filter_type not in [ 'group', 'host', 'environemnt' ]:
       print("Error: Unkown filter type argument: " + args.filter_type)
       exit(1)
-    if args.filter_value:
-      CONFIG_FILTER_VALUE=args.filter_value
-    else:
+    if args.filter_value is None:
       print("Error: if setting --filter-type, please add a filter-value")
       exit(1)
-    POST_DATA['filter_type'] = CONFIG_FILTER_TYPE
-    POST_DATA['filter_value'] = CONFIG_FILTER_VALUE
+    POST_DATA['filter_type'] = args.filter_type
+    POST_DATA['filter_value'] = args.filter_value
 
 
   config = _get_config(CONFIG)
