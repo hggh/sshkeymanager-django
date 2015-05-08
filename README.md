@@ -36,6 +36,17 @@ see [README.screenshots.md](https://github.com/hggh/sshkeymanager-django/blob/ma
    * import command
      * Hosts + Environments can be imported from files
      * SSH Keys can be imported from files
+ * export feature aka deployment:
+   * easy to use API, you can write your own export to your cfg
+   * Deployment via Puppet:
+     * [sshkeymanager-puppet](https://forge.puppetlabs.com/hggh/sshkeymanager)
+     * exports the configuration from the API to hiera json
+     * sshkeymanager uses the hiera json export and copy it to the hosts
+   * Deployment via script:
+     * Python2/Python3 script fetches configuration from API and deploy it via ssh/rsync to the hosts
+     * filter feature: only deploy host/group/environemnt
+       * if your hosts are behind a firewall you can only deploy the keys for a specific host/group/environment
+     * available with the [django app](https://github.com/hggh/sshkeymanager-django/tree/master/skm-deploy)
 
 
 ## Demo
