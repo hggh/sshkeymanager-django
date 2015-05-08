@@ -1,8 +1,18 @@
 #!/usr/bin/env python
+# 2015 - Jonas Genannt <jonas@brachium-system.net>
+# License: GPLv2
+#
+# This script works on Python2 and Python3
+#
+# this script is used with the SSHKey Manager Django app
+# you can deploy ssh public keys to your hosts
 
 import argparse
 import os
 import requests
+import tempfile
+import shutil
+from datetime import datetime
 try:
   import ConfigParser
 except:
@@ -14,6 +24,14 @@ except:
 DEFAULT_CONFIG='/etc/skm-deploy.conf'
 CONFIG=None
 POST_DATA={}
+
+def write_keys(directory, accounts):
+  for acc in accounts:
+    name = acc
+    filename = os.path.join(directory, name)
+    content = "### Deploy via skm-deploy on " + str(datetime.today()) + "\n" + "\n".join(accounts[name])
+    with open(filename, 'w') as f:
+      f.write(content)
 
 def _get_config(filename):
   setting = ConfigParser.ConfigParser()
@@ -66,8 +84,14 @@ if __name__ == '__main__':
   json = r.json()
   for key in json:
     host = json[key]
-    print(key)
-    print(host['environment'])
-    for account in host['accounts']:
-      print(account)
-
+    connect = key
+    if host['ip']:
+      connect = host['ip']
+    try:
+      print("Info: Deploying Host: " + key)
+      directory = tempfile.mkdtemp('_' + key, prefix='skm-deploy')
+      write_keys(directory, host['accounts'])
+      shutil.rmtree(directory)
+    except Exception as e:
+      print("Error: error on host " + key)
+      pass
