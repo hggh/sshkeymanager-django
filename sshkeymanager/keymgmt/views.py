@@ -41,8 +41,8 @@ def api_get_keys(request):
     if access_token not in settings.API_KEYS:
         return HttpResponse('API access token not found in configuration', status=401)
 
-    filter_type  = request.POST.get('filter_type',  None)
-    filter_value = request.POST.get('filter_value',  None)
+    filter_type = request.POST.get('filter_type', None)
+    filter_value = request.POST.get('filter_value', None)
 
     if filter_type is not None:
         if filter_value is None:
@@ -52,7 +52,7 @@ def api_get_keys(request):
     hosts = {}
     for host in key_access.all():
         accounts = {}
-        for name,keys in host.get_account_merged().items():
+        for name, keys in host.get_account_merged().items():
             account_keys = []
             for key in keys:
                 account_keys.append(key.ssh_key_entry())
@@ -102,12 +102,11 @@ class SSHAccountAvailableDelete(DeleteView):
     model = SSHAccountAvailable
     success_url = reverse_lazy('sshaccountavailable_list')
 
-
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
         messages.add_message(request, messages.INFO, self.object.name + ' was deleted successfully.')
-        return HttpResponseRedirect(self.get_success_url())    
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class EnvironmentList(ListView):
@@ -145,7 +144,7 @@ class EnvironmentDelete(DeleteView):
             messages.add_message(request, messages.INFO, self.object.name + ' was deleted successfully.')
         except DeleteNotAllowed:
             messages.add_message(request, messages.ERROR, self.object.name + ' can not deleted because hosts use that ENV!')
-        
+
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -200,22 +199,20 @@ class GroupRuleUpdate(SuccessMessageMixin, UpdateView):
     success_message = "rule %(rule)s was updated successfully"
     fields = ['rule', 'group']
 
-
     def get_context_data(self, **kwargs):
         context = super(GroupRuleUpdate, self).get_context_data(**kwargs)
         context['group'] = Group.objects.get(pk=self.kwargs['group_pk'])
         return context
 
-
     def get_success_url(self):
         return reverse_lazy('group_detail', kwargs={'pk': self.kwargs['group_pk']})
 
+
 class GroupRuleCreate(SuccessMessageMixin, CreateView):
     template_name = 'GroupRuleCreate.html'
-    model = GroupRule  
+    model = GroupRule
     success_message = "rule %(rule)s was created successfully"
     fields = ['rule', 'group']
-
 
     def get_success_url(self):
         return reverse_lazy('group_detail', kwargs={'pk': self.kwargs['pk']})
@@ -225,7 +222,7 @@ class GroupRuleCreate(SuccessMessageMixin, CreateView):
         return {
             'group': group,
         }
-    
+
     def get_context_data(self, **kwargs):
         context = super(GroupRuleCreate, self).get_context_data(**kwargs)
         context['group'] = Group.objects.get(pk=self.kwargs['pk'])
@@ -236,10 +233,8 @@ class GroupRuleDelete(DeleteView):
     template_name = 'GroupRuleDelete.html'
     model = GroupRule
 
-
     def get_success_url(self):
         return reverse_lazy('group_detail', kwargs={'pk': self.kwargs['group_pk']})
-
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -355,7 +350,7 @@ class SSHKeyringUpdate(SuccessMessageMixin, UpdateView):
     success_url = reverse_lazy('sshkeyring_list')
     success_message = "%(name)s was updated successfully"
     fields = ['name']
-    
+
     def get_context_data(self, **kwargs):
         context = super(SSHKeyringUpdate, self).get_context_data(**kwargs)
         context['sshkeys'] = json.dumps(SSHKey.all_as_array())
@@ -369,12 +364,10 @@ class SSHKeyringUpdate(SuccessMessageMixin, UpdateView):
         return post
 
 
-
 class SSHKeyringDelete(DeleteView):
     template_name = 'SSHKeyringDelete.html'
     model = SSHKeyring
     success_url = reverse_lazy('sshkeyring_list')
-
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -423,7 +416,6 @@ class SSHAccountKeyUpdate(SuccessMessageMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('sshaccount_detail', kwargs={'pk': self.kwargs['pk']})
 
-
     def get_context_data(self, **kwargs):
         context = super(SSHAccountKeyUpdate, self).get_context_data(**kwargs)
         context['sshkeys'] = json.dumps(SSHKey.all_as_array())
@@ -445,7 +437,7 @@ class SSHAccountUpdate(SuccessMessageMixin, UpdateView):
         context['host_list'] = Host.objects.all()
         context['sshaccount_available'] = SSHAccountAvailable.all_as_array()
         return context
-   
+
 
 class SSHAccountCreate(SuccessMessageMixin, CreateView):
     model = SSHAccount
@@ -455,7 +447,7 @@ class SSHAccountCreate(SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy('sshaccount_key_update', kwargs={'pk': self.object.id})
-    
+
     def get_context_data(self, **kwargs):
         context = super(SSHAccountCreate, self).get_context_data(**kwargs)
         context['environment_list'] = Environment.objects.all()
