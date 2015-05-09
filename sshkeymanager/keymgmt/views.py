@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-import simplejson
+import json
 
 from keymgmt.key import KeyAccess
 from keymgmt.forms import SSHAccountForm
@@ -63,7 +63,7 @@ def api_get_keys(request):
                 'accounts': accounts
             }
 
-    return HttpResponse(simplejson.dumps(hosts, sort_keys=True, indent=4))
+    return HttpResponse(json.dumps(hosts, sort_keys=True, indent=4))
 
 
 class AuditKey2Access(TemplateView):
@@ -338,7 +338,7 @@ class SSHKeyringCreate(SuccessMessageMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(SSHKeyringCreate, self).get_context_data(**kwargs)
-        context['sshkeys'] = simplejson.dumps(SSHKey.all_as_array())
+        context['sshkeys'] = json.dumps(SSHKey.all_as_array())
         return context
 
     def post(self, request, *args, **kwargs):
@@ -358,7 +358,7 @@ class SSHKeyringUpdate(SuccessMessageMixin, UpdateView):
     
     def get_context_data(self, **kwargs):
         context = super(SSHKeyringUpdate, self).get_context_data(**kwargs)
-        context['sshkeys'] = simplejson.dumps(SSHKey.all_as_array())
+        context['sshkeys'] = json.dumps(SSHKey.all_as_array())
         return context
 
     def post(self, request, *args, **kwargs):
@@ -426,8 +426,8 @@ class SSHAccountKeyUpdate(SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(SSHAccountKeyUpdate, self).get_context_data(**kwargs)
-        context['sshkeys'] = simplejson.dumps(SSHKey.all_as_array())
-        context['sshkeyrings'] = simplejson.dumps(SSHKeyring.all_as_array())
+        context['sshkeys'] = json.dumps(SSHKey.all_as_array())
+        context['sshkeyrings'] = json.dumps(SSHKeyring.all_as_array())
         return context
 
 

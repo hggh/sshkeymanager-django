@@ -114,7 +114,6 @@ You can use the API to loop through your servers and copy the keys to the server
 * Python 3
 * Django 1.8
 * django-model-utils
-* simplejson
 * django-bootstrap3
 
 ## license/copyright
