@@ -28,6 +28,7 @@ List all Hosts
             <td>{{ host.get_accounts|length }}</td>
             <td>
                 <a href="{% url 'host_detail' host.id %}">{% bootstrap_icon "eye-open" %}</a>
+                <a href="{% url 'host_update' host.id %}">{% bootstrap_icon "pencil" %}</a>
                 <a href="{% url 'host_delete' host.id %}">{% bootstrap_icon "trash" %}</a>
             </td>
         </tr>

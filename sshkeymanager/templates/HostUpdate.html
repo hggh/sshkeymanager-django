@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block site_title %}
+update Host {{ object.name }}
+{% endblock %}
+
+{% block content %}
+<form action="" method="post" class="form">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+    <button type="submit" class="btn btn-primary">Save!</button>
+    {% endbuttons %}
+</form>
+{% endblock %}

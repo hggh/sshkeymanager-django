@@ -300,17 +300,26 @@ class HostDetail(DetailView):
     model = Host
 
 
+class HostUpdate(SuccessMessageMixin, UpdateView):
+    template_name = 'HostUpdate.html'
+    model = Host
+    success_message = "%(name)s was updated successfully"
+    fields = ['name', 'environment', 'ipaddress']
+
+    def get_success_url(self):
+        return reverse_lazy('host_detail', kwargs={'pk': self.kwargs['pk']})
+
+
 class HostDelete(DeleteView):
     template_name = 'HostDelete.html'
     model = Host
     success_url = reverse_lazy('host_list')
 
-
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
         messages.add_message(request, messages.INFO, self.object.name + ' was deleted successfully.')
-        return HttpResponseRedirect(self.get_success_url())             
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class SSHKeyringList(ListView):
