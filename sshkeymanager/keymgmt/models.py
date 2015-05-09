@@ -78,7 +78,6 @@ class Environment(models.Model):
     created = AutoCreatedField(_('created'))
     updated = AutoLastModifiedField(_('updated'))
 
-
     class Meta:
         ordering = ['name']
 
@@ -121,7 +120,6 @@ class Host(models.Model):
     created = AutoCreatedField(_('created'))
     updated = AutoLastModifiedField(_('updated'))
 
-
     def get_account_merged(self):
         """
             merge all accounts from Environments,Groups and the Host
@@ -145,7 +143,7 @@ class Host(models.Model):
                 accounts[acc.name].append(acc.get_all_keys())
 
         accounts_merged = {}
-        for account,keys in accounts.items():
+        for account, keys in accounts.items():
             accounts_merged[account] = []
             merged = list(itertools.chain(*keys))
             accounts_merged[account] = list(OrderedDict.fromkeys(merged))
@@ -196,7 +194,6 @@ class Group(models.Model):
     updated = AutoLastModifiedField(_('updated'))
     hosts = models.ManyToManyField(Host)
 
-
     class Meta:
         ordering = ['name']
 
@@ -220,6 +217,7 @@ class Group(models.Model):
         SSHAccount.objects.all().filter(obj_name='group').filter(obj_id=self.id).delete()
         super(Group, self).delete(using=using)
 
+
 class GroupRule(models.Model):
     """
     Group Rule model.
@@ -228,7 +226,6 @@ class GroupRule(models.Model):
     group = models.ForeignKey(Group)
     created = AutoCreatedField(_('created'))
     updated = AutoLastModifiedField(_('updated'))
-
 
     def rule_match_host(self, hostname):
         if re.search(r'%s' % self.rule, hostname):
@@ -252,7 +249,6 @@ class SSHKey(models.Model):
     sshkey = models.TextField(_('SSH Key'), null=False, validators=[validate_sshkey])
     created = AutoCreatedField(_('created'))
     updated = AutoLastModifiedField(_('updated'))
-
 
     class Meta:
         ordering = ['name']
@@ -360,11 +356,9 @@ class SSHAccount(models.Model):
     host_objects = SSHAccountHostManager()
     environment_objects = SSHAccountEnvironmentManager()
 
-
     class Meta:
         unique_together = ('name', 'obj_name', 'obj_id')
         ordering = ['name']
-
 
     def clean(self):
         self.name = self.name.strip()
