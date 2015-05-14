@@ -48,7 +48,7 @@ see [README.screenshots.md](https://github.com/hggh/sshkeymanager-django/blob/ma
        * if your hosts are behind a firewall you can only deploy the keys for a specific host/group/environment
      * available with the [django app](https://github.com/hggh/sshkeymanager-django/tree/master/skm-deploy)
 
-## Demo
+## Vagrant
 
 Vagrant Box: https://github.com/hggh/sshkeymanager-vagrant
 
